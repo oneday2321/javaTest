@@ -1,10 +1,12 @@
 package com.test1;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class functionTest1 {
 
     public static void main(String[] args) {
         System.out.println("----------欢迎访问系统----------");
+        ArrayList<User> userInfo = new ArrayList<>();
         isGoOn:while (true) {
             System.out.println("请选择操作方式：1、登陆 2、注册 3、忘记密码");
             Scanner sc = new Scanner(System.in);
@@ -15,9 +17,15 @@ public class functionTest1 {
                     break;
                 }
                 case "2" :{
-                    System.out.println("注册用户");
-                    inputInfo();
-
+                    isOne:while (true) {
+                        User user = inputInfo();
+                        int oneUser = isOneUser(userInfo, user);
+                        if(oneUser == 1){
+                            userInfo.add(user);
+                            break isOne;
+                        }
+                    }
+                    System.out.println("用户注册成功！");
                     break;
                 }
                 case "3" :{
@@ -31,7 +39,7 @@ public class functionTest1 {
             }
         }
     }
-    public static void inputInfo(){
+    public static User inputInfo(){
         Scanner sc = new Scanner(System.in);
         User user = new User();
         isGo:while (true) {
@@ -69,6 +77,7 @@ public class functionTest1 {
             }
             break isGo;
         }
+        return user;
     }
 
     public static void loginSystem(){
@@ -76,6 +85,8 @@ public class functionTest1 {
          * @Param
          * @Return
          */
+
+
     }
 
     public static void regUser(){}
@@ -192,4 +203,29 @@ public class functionTest1 {
             return 2;
         }
     }
+
+    public static int isOneUser(ArrayList<User> userInfo, User User){
+        /*
+        * @Param 对象集合，单独对象
+        * @Return 1 正常注册
+        * @Return 2 该账号已经存在，不能注册成功
+        */
+        if (userInfo.size() == 0){
+            return 1;
+        }
+        for (int i = 0; i < userInfo.size(); i++) {
+            String username = userInfo.get(i).getUsername();
+            if (username.equals(User.getUsername())){
+                System.out.println("该账号已经存在，不能注册成功,请重新输入");
+                return 2;
+            }
+        }
+        return 1;
+    }
+
+
+
+
+
+
 }
