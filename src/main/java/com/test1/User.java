@@ -8,7 +8,7 @@ public class User {
 
     public User() {
     }
-
+    //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 夹带一个私货
     public User(String username, String password, int phone, String idNumber) {
         this.username = username;
         this.password = password;
