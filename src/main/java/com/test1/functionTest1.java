@@ -17,6 +17,7 @@ public class functionTest1 {
                 case "2" :{
                     System.out.println("注册用户");
                     inputInfo();
+
                     break;
                 }
                 case "3" :{
@@ -24,7 +25,7 @@ public class functionTest1 {
                     break;
                 }
                 default:{
-                    System.out.println("输入无效，重新输入");
+                    System.out.print("输入无效");
                     break;
                 }
             }
@@ -32,25 +33,41 @@ public class functionTest1 {
     }
     public static void inputInfo(){
         Scanner sc = new Scanner(System.in);
+        User user = new User();
         isGo:while (true) {
-            System.out.print("请输入账户：");
-            String username = sc.next();
-            int yiShu = isYiShu(username);
-            if(yiShu == 1){
-
+            isName:while (true) {
+                System.out.print("请输入账户：");
+                String username = sc.next();
+                int yiShu = isYiShu(username);
+                if(yiShu == 1){
+                    user.setUsername(username);
+                    break isName;
+                }
             }
-
             System.out.print("请输入密码：");
             String password = sc.next();
             isPassWord(password);
+            user.setPassword(password);
+            isphone:while (true) {
+                System.out.print("请输入手机号：");
+                String phone = sc.next();
+                int phone1 = isPhone(phone);
+                if (phone1 ==1){
+                    user.setPhone(phone);
+                    break isphone;
+                }
+            }
 
-            System.out.print("请输入手机号：");
-            String phone = sc.next();
-            int phone1 = isPhone(phone);
-
-            System.out.print("请输入身份证号：");
-            String idNumber = sc.next();
-            int idNumber1 = isIdNumber(idNumber);
+            isId:while (true) {
+                System.out.print("请输入身份证号：");
+                String idNumber = sc.next();
+                int idNumber1 = isIdNumber(idNumber);
+                if (idNumber1 == 1){
+                    user.setIdNumber(idNumber);
+                    break isId;
+                }
+            }
+            break isGo;
         }
     }
 

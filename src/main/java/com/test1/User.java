@@ -3,13 +3,13 @@ package com.test1;
 public class User {
     private String username;
     private String password;
-    private int phone;
+    private String phone;
     private String idNumber;
 
     public User() {
     }
     //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 夹带一个私货
-    public User(String username, String password, int phone, String idNumber) {
+    public User(String username, String password, String phone, String idNumber) {
         this.username = username;
         this.password = password;
         this.phone = phone;
@@ -32,11 +32,11 @@ public class User {
         this.password = password;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
