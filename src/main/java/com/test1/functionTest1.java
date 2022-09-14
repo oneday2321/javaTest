@@ -64,27 +64,27 @@ public class functionTest1 {
             String password = sc.next();
             isPassWord(password);
             user.setPassword(password);
-            isPhone1:
-            while (true) {
-                System.out.print("请输入手机号：");
-                String phone = sc.next();
-                int phone1 = isPhone(phone);
-                if (phone1 == 1) {
-                    user.setPhone(phone);
-                    break isPhone1;
-                }
-            }
+//            isPhone1:
+//            while (true) {
+//                System.out.print("请输入手机号：");
+//                String phone = sc.next();
+//                int phone1 = isPhone(phone);
+//                if (phone1 == 1) {
+//                    user.setPhone(phone);
+//                    break isPhone1;
+//                }
+//            }
 
-            isId:
-            while (true) {
-                System.out.print("请输入身份证号：");
-                String idNumber = sc.next();
-                int idNumber1 = isIdNumber(idNumber);
-                if (idNumber1 == 1) {
-                    user.setIdNumber(idNumber);
-                    break isId;
-                }
-            }
+//            isId:
+//            while (true) {
+//                System.out.print("请输入身份证号：");
+//                String idNumber = sc.next();
+//                int idNumber1 = isIdNumber(idNumber);
+//                if (idNumber1 == 1) {
+//                    user.setIdNumber(idNumber);
+//                    break isId;
+//                }
+//            }
             break isGo;
         }
         return user;
@@ -96,46 +96,45 @@ public class functionTest1 {
          * @Return
          */
         Scanner sc = new Scanner(System.in);
-        String s = yanZ();
+//        String s = yanZ();
         System.out.print("请输入账户：");
         String name = sc.next();
         System.out.print("请输入密码：");
         String password = sc.next();
-        System.out.println("验证码：" + s);
-        System.out.print("请输入验证码：");
+//        System.out.println("验证码：" + s);
+//        System.out.print("请输入验证码：");
+        idLogin:
         while (true) {
-            String next2 = sc.next();
-            if(next2.equals(s)){
+//            String next2 = sc.next();
+//            if(next2.equals(s)){
                 if (userInfo.size() != 0) {
-                    for (int a = 0; a<3;a++) {
-                        String name1 = name;
-                        String password1 = password;
-
+                    for (int a = 3; a > 0;a--) {
                         for (User user : userInfo) {
-                            System.out.println(user.getUsername()+"===="+user.getPassword());
-                            System.out.println(name+"----"+password);
-                            if (name1.equals(user.getUsername()) && password1.equals(user.getPassword()) ){
+                            if (name.equals(user.getUsername()) && password.equals(user.getPassword()) ){
                                 System.out.println("登陆成功");
-                                break;
+                                break idLogin;
                             }
                         }
-                        System.out.println("登陆用户的用户名或者密码输入错误，请重新输入用户名和密码！");
-                        System.out.print("请输入账户：");
-                        name1 = sc.next();
-                        System.out.print("请输入密码：");
-                        password1 = sc.next();
+                        if (a > 0) {
+                            System.out.println("登陆用户的用户名或者密码输入错误，请重新输入用户名和密码！还有"+a+"次机会：");
+                            System.out.print("请输入账户：");
+                            name = sc.next();
+                            System.out.print("请输入密码：");
+                            password = sc.next();
+                        }
                     }
+                    System.out.println("用户被锁定！");
                     break;
-
                 } else {
-                    System.out.println("用户名未注册，请先注册！");
+                    System.out.println("用户未注册，请先注册！");
                     break;
                 }
-            }else {
-                System.out.print("验证码输入错误，请重新输入：");
+//            }else {
+//                System.out.print("验证码输入错误，请重新输入：");
+//            }
             }
         }
-    }
+
 
     public static void forgetPassword() {
     }
