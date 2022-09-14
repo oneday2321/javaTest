@@ -64,14 +64,14 @@ public class functionTest1 {
             String password = sc.next();
             isPassWord(password);
             user.setPassword(password);
-            isphone:
+            isPhone1:
             while (true) {
                 System.out.print("请输入手机号：");
                 String phone = sc.next();
                 int phone1 = isPhone(phone);
                 if (phone1 == 1) {
                     user.setPhone(phone);
-                    break isphone;
+                    break isPhone1;
                 }
             }
 
@@ -97,22 +97,36 @@ public class functionTest1 {
          */
         Scanner sc = new Scanner(System.in);
         String s = yanZ();
-
         System.out.print("请输入账户：");
         String name = sc.next();
-
         System.out.print("请输入密码：");
         String password = sc.next();
-
         System.out.println("验证码：" + s);
-
         System.out.print("请输入验证码：");
         while (true) {
             String next2 = sc.next();
             if(next2.equals(s)){
                 if (userInfo.size() != 0) {
-                    System.out.println("登录");
-                    return;
+                    for (int a = 0; a<3;a++) {
+                        String name1 = name;
+                        String password1 = password;
+
+                        for (User user : userInfo) {
+                            System.out.println(user.getUsername()+"===="+user.getPassword());
+                            System.out.println(name+"----"+password);
+                            if (name1.equals(user.getUsername()) && password1.equals(user.getPassword()) ){
+                                System.out.println("登陆成功");
+                                break;
+                            }
+                        }
+                        System.out.println("登陆用户的用户名或者密码输入错误，请重新输入用户名和密码！");
+                        System.out.print("请输入账户：");
+                        name1 = sc.next();
+                        System.out.print("请输入密码：");
+                        password1 = sc.next();
+                    }
+                    break;
+
                 } else {
                     System.out.println("用户名未注册，请先注册！");
                     break;
