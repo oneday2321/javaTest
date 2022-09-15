@@ -16,8 +16,22 @@ public class functionTest1 {
             String next = sc.next();
             switch (next) {
                 case "1": {
-                    System.out.println("登陆系统");
-                    loginSystem(userInfo);
+                    for (int j = 3;j >= 0;j--) {
+                        int i = loginSystem(userInfo);
+                        if(i == 1){
+                            System.out.println("成功登陆系统");
+                            break ;
+                        }else if (i == 2){
+                            System.out.println("用户不存在，请注册用户");
+                            break ;
+                        }else if (i == 3){
+                            if(j == 0){
+                                System.out.println("用户次数用尽，无法再次登陆");
+                                break ;
+                            }
+                            System.out.println("用户名或者密码错误，请重新输入,还有"+j+"次机会");
+                        }
+                    }
                     break;
                 }
                 case "2": {
@@ -38,7 +52,7 @@ public class functionTest1 {
                     break;
                 }
                 default: {
-                    System.out.print("输入无效");
+                    System.out.println("输入无效");
                     break;
                 }
             }
@@ -90,82 +104,38 @@ public class functionTest1 {
         return user;
     }
 
-    public static void loginSystem(ArrayList<User> userInfo) {
+    public static int loginSystem(ArrayList<User> userInfo) {
         /*
          * @Param   现有对象集合
-         * @Return
+         * @Return  1   正常登陆
+         * @Return  2   用户不存在
+         * @Return  3   用户或者密码错误
          */
         Scanner sc = new Scanner(System.in);
-//        String s = yanZ();
+        String s = yanZ();
         System.out.print("请输入账户：");
         String name = sc.next();
         System.out.print("请输入密码：");
         String password = sc.next();
-//        System.out.println("验证码：" + s);
-//        System.out.print("请输入验证码：");
-//        idLogin:
-//        while (true) {
-////            String next2 = sc.next();
-////            if(next2.equals(s)){
-//                if (userInfo.size() != 0) {
-//                    for (int a = 3; a > 0;a--) {
-//                        for (User user : userInfo) {
-//                            if (name.equals(user.getUsername()) && password.equals(user.getPassword()) ){
-//                                System.out.println("登陆成功");
-//                                break idLogin;
-//                            }
-//                        }
-//                        if (a > 0) {
-//                            System.out.println("登陆用户的用户名或者密码输入错误，请重新输入用户名和密码！还有"+a+"次机会：");
-//                            System.out.print("请输入账户：");
-//                            name = sc.next();
-//                            System.out.print("请输入密码：");
-//                            password = sc.next();
-//                        }
-//                    }
-//                    System.out.println("用户被锁定！");
-//                    break;
-//                } else {
-//                    System.out.println("用户未注册，请先注册！");
-//                    break;
-//                }
-////            }else {
-////                System.out.print("验证码输入错误，请重新输入：");
-////            }
-//            }
-        /*
-        * 判断用户列表是不是空白-》
-        * 判断用户吃否存在-》
-        * 判断用户密码是否正确-》
-        * 输入错误以后，开始循环输入账户和密码-》3次
-        * */
-        isd:
+        System.out.println("验证码：" + s);
+        System.out.print("请输入验证码：");
         while (true) {
-            if(userInfo.size() != 0){
-                idFor:for (User user : userInfo) {
+            String next2 = sc.next();
+            if(next2.equals(s)) {
+                for (User user : userInfo) {
                     if (user.getUsername().equals(name)) {
                         if (user.getPassword().equals(password)) {
-                            System.out.println("登陆系统成功！");
-                            break isd;
+                            return 1;
                         } else {
-                            System.out.println("用户输入的密码错误，请重新输入账户密码：");
-                            System.out.print("请输入账户：");
-                            name = sc.next();
-                            System.out.print("请输入密码：");
-                            password = sc.next();
-                            break idFor;
+                            return 3;
                         }
                     }
                 }
-                System.out.println("用户不存在，请重新输入账户密码：");
-                break isd;
+                return 2;
             }
-            System.out.println("用户未注册，请注册！");
-            break isd;
+            System.out.print("验证码输入错误，请重新输入：");
         }
-        System.out.println("结束");
     }
-
 
     public static void forgetPassword() {
     }
