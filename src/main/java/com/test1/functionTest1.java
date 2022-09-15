@@ -9,7 +9,6 @@ public class functionTest1 {
     public static void main(String[] args) {
         System.out.println("----------欢迎访问系统----------");
         ArrayList<User> userInfo = new ArrayList<>();
-        isGoOn:
         while (true) {
             System.out.println("请选择操作方式：1、登陆 2、注册 3、忘记密码");
             Scanner sc = new Scanner(System.in);
@@ -48,7 +47,20 @@ public class functionTest1 {
                     break;
                 }
                 case "3": {
-                    System.out.println("忘记密码");
+                    System.out.print("输入用户名：");
+                    String name = sc.next();
+                    System.out.print("输入手机号：");
+                    String phone = sc.next();
+                    System.out.print("输入身份证号：");
+                    String idNumber = sc.next();
+                    int i = forgetPassword(userInfo, name, phone, idNumber);
+                    if(i == 1){
+                        System.out.println("修改成功");
+                    }else if(i == 2){
+                        System.out.println("用户不存在");
+                    }else if(i == 3){
+                        System.out.println("用户信息不匹配");
+                    }
                     break;
                 }
                 default: {
@@ -78,27 +90,27 @@ public class functionTest1 {
             String password = sc.next();
             isPassWord(password);
             user.setPassword(password);
-//            isPhone1:
-//            while (true) {
-//                System.out.print("请输入手机号：");
-//                String phone = sc.next();
-//                int phone1 = isPhone(phone);
-//                if (phone1 == 1) {
-//                    user.setPhone(phone);
-//                    break isPhone1;
-//                }
-//            }
+            isPhone1:
+            while (true) {
+                System.out.print("请输入手机号：");
+                String phone = sc.next();
+                int phone1 = isPhone(phone);
+                if (phone1 == 1) {
+                    user.setPhone(phone);
+                    break isPhone1;
+                }
+            }
 
-//            isId:
-//            while (true) {
-//                System.out.print("请输入身份证号：");
-//                String idNumber = sc.next();
-//                int idNumber1 = isIdNumber(idNumber);
-//                if (idNumber1 == 1) {
-//                    user.setIdNumber(idNumber);
-//                    break isId;
-//                }
-//            }
+            isId:
+            while (true) {
+                System.out.print("请输入身份证号：");
+                String idNumber = sc.next();
+                int idNumber1 = isIdNumber(idNumber);
+                if (idNumber1 == 1) {
+                    user.setIdNumber(idNumber);
+                    break isId;
+                }
+            }
             break isGo;
         }
         return user;
@@ -137,7 +149,28 @@ public class functionTest1 {
         }
     }
 
-    public static void forgetPassword() {
+    public static int forgetPassword(ArrayList<User> userInfo,String name ,String phone,String idNumber) {
+        /*
+        * @Description  忘记密码
+        * @Params  用户集合、忘记密码得用户,手机号,身份证号
+        * @Return  1    修改成功
+        * @Return  2    用户不存在
+        * @Return  3    用户信息不匹配
+        */
+        for (User user : userInfo) {
+            String username = user.getUsername();
+            if (username.equals(name)) {
+                if (user.getPhone().equals(phone) && user.getIdNumber().equals(idNumber)) {
+                    Scanner scanner = new Scanner(System.in);
+                    System.out.print("输入修改得密码：");
+                    user.setPassword(scanner.next());
+                    return 1;
+                } else {
+                    return 3;
+                }
+            }
+        }
+        return 2;
     }
 
     public static int isYiShu(String username) {
