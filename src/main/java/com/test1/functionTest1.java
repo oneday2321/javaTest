@@ -103,37 +103,68 @@ public class functionTest1 {
         String password = sc.next();
 //        System.out.println("验证码：" + s);
 //        System.out.print("请输入验证码：");
-        idLogin:
+//        idLogin:
+//        while (true) {
+////            String next2 = sc.next();
+////            if(next2.equals(s)){
+//                if (userInfo.size() != 0) {
+//                    for (int a = 3; a > 0;a--) {
+//                        for (User user : userInfo) {
+//                            if (name.equals(user.getUsername()) && password.equals(user.getPassword()) ){
+//                                System.out.println("登陆成功");
+//                                break idLogin;
+//                            }
+//                        }
+//                        if (a > 0) {
+//                            System.out.println("登陆用户的用户名或者密码输入错误，请重新输入用户名和密码！还有"+a+"次机会：");
+//                            System.out.print("请输入账户：");
+//                            name = sc.next();
+//                            System.out.print("请输入密码：");
+//                            password = sc.next();
+//                        }
+//                    }
+//                    System.out.println("用户被锁定！");
+//                    break;
+//                } else {
+//                    System.out.println("用户未注册，请先注册！");
+//                    break;
+//                }
+////            }else {
+////                System.out.print("验证码输入错误，请重新输入：");
+////            }
+//            }
+        /*
+        * 判断用户列表是不是空白-》
+        * 判断用户吃否存在-》
+        * 判断用户密码是否正确-》
+        * 输入错误以后，开始循环输入账户和密码-》3次
+        * */
+        isd:
         while (true) {
-//            String next2 = sc.next();
-//            if(next2.equals(s)){
-                if (userInfo.size() != 0) {
-                    for (int a = 3; a > 0;a--) {
-                        for (User user : userInfo) {
-                            if (name.equals(user.getUsername()) && password.equals(user.getPassword()) ){
-                                System.out.println("登陆成功");
-                                break idLogin;
-                            }
-                        }
-                        if (a > 0) {
-                            System.out.println("登陆用户的用户名或者密码输入错误，请重新输入用户名和密码！还有"+a+"次机会：");
+            if(userInfo.size() != 0){
+                idFor:for (User user : userInfo) {
+                    if (user.getUsername().equals(name)) {
+                        if (user.getPassword().equals(password)) {
+                            System.out.println("登陆系统成功！");
+                            break isd;
+                        } else {
+                            System.out.println("用户输入的密码错误，请重新输入账户密码：");
                             System.out.print("请输入账户：");
                             name = sc.next();
                             System.out.print("请输入密码：");
                             password = sc.next();
+                            break idFor;
                         }
                     }
-                    System.out.println("用户被锁定！");
-                    break;
-                } else {
-                    System.out.println("用户未注册，请先注册！");
-                    break;
                 }
-//            }else {
-//                System.out.print("验证码输入错误，请重新输入：");
-//            }
+                System.out.println("用户不存在，请重新输入账户密码：");
+                break isd;
             }
+            System.out.println("用户未注册，请注册！");
+            break isd;
         }
+        System.out.println("结束");
+    }
 
 
     public static void forgetPassword() {
