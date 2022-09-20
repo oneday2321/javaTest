@@ -295,8 +295,8 @@ public class functionTest1 {
         if (userInfo.size() == 0) {
             return 1;
         }
-        for (int i = 0; i < userInfo.size(); i++) {
-            String username = userInfo.get(i).getUsername();
+        for (com.test1.User user : userInfo) {
+            String username = user.getUsername();
             if (username.equals(User.getUsername())) {
                 System.out.println("该账号已经存在，不能注册成功,请重新输入");
                 return 2;
